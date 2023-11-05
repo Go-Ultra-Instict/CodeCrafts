@@ -1,6 +1,5 @@
 ﻿using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
-
 namespace Application;
 
 public static class DependencyInjection
@@ -9,10 +8,12 @@ public static class DependencyInjection
     {
 
         var assembly = typeof(DependencyInjection).Assembly;
-        //services.AddMediatR(c => c.RegisterServicesFromAssembly(assembly));
+  
+        services.AddAutoMapper(assembly);
+        services.AddMediatR(config =>
+            config.RegisterServicesFromAssembly(assembly));
+        //Todo Exception Handler
 
-        services.AddMediatR(configuration =>
-        configuration.RegisterServicesFromAssembly(assembly));
         services.AddValidatorsFromAssembly(assembly);
 
         return services;
