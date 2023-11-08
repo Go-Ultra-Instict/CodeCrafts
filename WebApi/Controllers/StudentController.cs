@@ -8,20 +8,17 @@ using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace CodeCrafts.WebAPI.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class StudentController : ControllerBase
+  
+   
+    public class StudentController : ApiControllerBase
     {
         private readonly IMediator _mediator;
-        public StudentController(IMediator mediator)
-        {
-          _mediator = mediator;
-        }
+       
         // GET: api/<StudentController>
         [HttpGet]
         public async Task<StudentDto> Get([FromQuery]GetStudentQuery query)
         {
-            return await _mediator.Send(query);
+            return await Mediator.Send(query);
         }
 
         // GET api/<StudentController>/5
@@ -35,7 +32,7 @@ namespace CodeCrafts.WebAPI.Controllers
         [HttpPost]
         public void Post([FromBody] CreateStudentCommand createStudent)
         {
-            _mediator.Send( createStudent);
+            Mediator.Send( createStudent);
         }
 
         // PUT api/<StudentController>/5
