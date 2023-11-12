@@ -1,5 +1,9 @@
-﻿using FluentValidation;
+﻿using Application.Mappings;
+using AutoMapper;
+using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
+
+
 namespace Application;
 
 public static class DependencyInjection
@@ -8,8 +12,11 @@ public static class DependencyInjection
     {
 
         var assembly = typeof(DependencyInjection).Assembly;
-  
-        services.AddAutoMapper(assembly);
+
+        // services.AddAutoMapper(assembly);
+
+        services.AddAutoMapper(cfg => cfg.AddProfile<AutoMapperProfileRegister>(), assembly);
+
         services.AddMediatR(config =>
             config.RegisterServicesFromAssembly(assembly));
         //Todo Exception Handler
